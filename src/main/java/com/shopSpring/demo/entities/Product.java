@@ -3,8 +3,11 @@ package com.shopSpring.demo.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "products")
@@ -21,9 +24,17 @@ public class Product {
     private String title;
 
     @Column(name = "price")
-    private Double price;
+    private int price;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @Column(name = "create_at")
+    @CreationTimestamp
+    private LocalDateTime createAt;
+
+    @Column(name = "update_at")
+    @UpdateTimestamp
+    private LocalDateTime updateAt;
 }
