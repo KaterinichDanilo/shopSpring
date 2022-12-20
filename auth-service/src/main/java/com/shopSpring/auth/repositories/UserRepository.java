@@ -1,6 +1,6 @@
-package com.shopSpring.core.repositories;
+package com.shopSpring.auth.repositories;
 
-import com.shopSpring.core.entities.User;
+import com.shopSpring.auth.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +11,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findById(Long id);
     Optional<User> findByEmail(String email);
     Optional<User> findByLogin(String login);
-    void save(User user);
 }

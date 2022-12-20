@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class CartController {
     private CartService cartService;
     private CartConverter cartConverter;
-    private OrderService orderService;
 
     @GetMapping("/add/{id}")
     public void addToCart(@PathVariable(name = "id") Long id){
@@ -26,11 +25,6 @@ public class CartController {
     @GetMapping
     public CartDto getCart(){
         return cartConverter.entityToDto(cartService.getCurrentCart());
-    }
-
-    @GetMapping("/order/{id}")
-    public void makeOrder(@PathVariable(name = "id") Long id){
-        orderService.makeOrder(id, cartService.getCurrentCart());
     }
 
     @GetMapping("/inc/{id}")

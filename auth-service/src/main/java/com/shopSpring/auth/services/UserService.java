@@ -1,8 +1,8 @@
-package com.shopSpring.core.services;
+package com.shopSpring.auth.services;
 
-import com.shopSpring.core.entities.Role;
-import com.shopSpring.core.entities.User;
-import com.shopSpring.core.repositories.UserRepository;
+import com.shopSpring.auth.entities.Role;
+import com.shopSpring.auth.entities.User;
+import com.shopSpring.auth.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

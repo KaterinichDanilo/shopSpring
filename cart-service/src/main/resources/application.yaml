@@ -2,3 +2,9 @@ server:
   port: 8190
   servlet:
     context-path: /shop-cart
+integrations:
+  product-service:
+    url: http://localhost:8189/shop/
+    read-timeout: 10000
+    write-timeout: 5000
+    connect-timeout: 5000

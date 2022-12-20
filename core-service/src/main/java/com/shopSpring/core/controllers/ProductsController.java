@@ -1,7 +1,7 @@
 package com.shopSpring.core.controllers;
 
+import com.shopSpring.api.ProductDto;
 import com.shopSpring.core.converters.ProductConverter;
-import com.shopSpring.core.dto.ProductDto;
 import com.shopSpring.core.entities.Product;
 import com.shopSpring.core.services.CategoryService;
 import com.shopSpring.core.services.ProductService;

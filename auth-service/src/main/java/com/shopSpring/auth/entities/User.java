@@ -1,4 +1,4 @@
-package com.shopSpring.core.entities;
+package com.shopSpring.auth.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

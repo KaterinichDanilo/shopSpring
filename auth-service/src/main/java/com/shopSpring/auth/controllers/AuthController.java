@@ -1,10 +1,11 @@
-package com.shopSpring.core.controllers;
+package com.shopSpring.auth.controllers;
 
-import com.shopSpring.core.dto.JwtRequest;
-import com.shopSpring.core.dto.JwtResponse;
-import com.shopSpring.core.entities.User;
-import com.shopSpring.core.services.UserService;
-import com.shopSpring.core.utils.JwtTokenUtil;
+import com.shopSpring.api.AppError;
+import com.shopSpring.api.JwtRequest;
+import com.shopSpring.api.JwtResponse;
+import com.shopSpring.auth.entities.User;
+import com.shopSpring.auth.services.UserService;
+import com.shopSpring.auth.utils.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,15 +27,12 @@ public class AuthController {
     @PostMapping("/auth")
     public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest) {
         try {
-            System.out.println(authRequest.getLogin());
-            System.out.println(authRequest.getPassword());
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getLogin(), authRequest.getPassword()));
         } catch (BadCredentialsException e) {
             return new ResponseEntity<>(new AppError(HttpStatus.UNAUTHORIZED.value(), "Incorrect username or password"), HttpStatus.UNAUTHORIZED);
         }
         UserDetails userDetails = userService.loadUserByUsername(authRequest.getLogin());
         String token = jwtTokenUtil.generateToken(userDetails);
-        System.out.println(token);
         return ResponseEntity.ok(new JwtResponse(token));
     }
 

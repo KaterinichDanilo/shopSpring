@@ -1,6 +1,6 @@
 package com.shopSpring.core.converters;
 
-import com.shopSpring.core.dto.CategoryDto;
+import com.shopSpring.api.CategoryDto;
 import com.shopSpring.core.entities.Category;
 import com.shopSpring.core.services.CategoryService;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.shopSpring.core.utils;
+package com.shopSpring.auth.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

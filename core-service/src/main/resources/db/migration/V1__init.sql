@@ -1,34 +1,7 @@
-DROP TABLE IF EXISTS users_roles;
-DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS orders_item;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS orders;
-DROP TABLE IF EXISTS users;
-
-CREATE TABLE roles
-(
-    id bigserial PRIMARY KEY,
-    name CHAR(50)
-);
-
-CREATE TABLE users
-(
-    id bigserial PRIMARY KEY,
-    username CHAR(50) NOT NULL,
-    password VARCHAR(80) NOT NULL,
-    first_name CHAR(50) NOT NULL,
-    last_name CHAR(50) NOT NULL,
-    email CHAR(50) NOT NULL
-);
-
-CREATE TABLE users_roles (
-    user_id bigserial NOT NULL,
-    role_id bigserial NOT NULL,
-    PRIMARY KEY (user_id, role_id),
-    FOREIGN KEY (role_id) REFERENCES roles (id),
-    FOREIGN KEY (user_id) REFERENCES users (id)
-);
 
 CREATE TABLE categories
 (
@@ -50,11 +23,10 @@ CREATE TABLE products
 CREATE TABLE orders
 (
     id bigserial PRIMARY KEY,
-    user_id bigint NOT NULL,
+    username CHAR(250) NOT NULL,
     create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     status CHAR(50) NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE orders_item

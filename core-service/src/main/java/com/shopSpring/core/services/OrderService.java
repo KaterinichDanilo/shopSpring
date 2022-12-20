@@ -1,10 +1,11 @@
 package com.shopSpring.core.services;
 
+import com.shopSpring.api.CartDto;
 import com.shopSpring.api.ResourceNotFoundException;
-import com.shopSpring.core.model.Cart;
 import com.shopSpring.core.entities.Order;
 import com.shopSpring.core.entities.OrderItem;
-import com.shopSpring.core.entities.User;
+import com.shopSpring.core.integrations.CartServiceIntegration;
+import com.shopSpring.core.model.Cart;
 import com.shopSpring.core.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,14 +18,14 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
-    private final com.shopSpring.core.services.ProductService productService;
-    private final com.shopSpring.core.services.UserService userService;
+    private final ProductService productService;
+    private final CartServiceIntegration cartServiceIntegration;
 
     @Transactional
-    public void makeOrder(Long userId, Cart cart){
-        User user = userService.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found id = " + userId));
+    public void makeOrder(String login){
         Order order = new Order();
-        order.setUser(user);
+        CartDto cart = cartServiceIntegration.getCart();
+        order.setUsername(login);
         List<OrderItem> orderItems = cart.getCart().stream().map(i ->
                 new OrderItem(i.getQuantity(),
                         productService.findById(i.getProdId()).orElseThrow(() ->

@@ -44,4 +44,7 @@ public class ProductDto {
         this.price = price;
         this.categoryTitle = categoryTitle;
     }
+
+    public ProductDto() {
+    }
 }

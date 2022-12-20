@@ -1,6 +1,6 @@
 package com.shopSpring.core.converters;
 
-import com.shopSpring.core.dto.ProductDto;
+import com.shopSpring.api.ProductDto;
 import com.shopSpring.core.entities.Category;
 import com.shopSpring.core.entities.Product;
 import com.shopSpring.core.services.CategoryService;

@@ -3,7 +3,7 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
     const contextPath = 'http://localhost:8189/shop/api/v1';
 
     $scope.loadProducts = function () {
-        $http.get('http://localhost:8189/shop/api/v1/products').then(function (response){
+        $http.get('http://localhost:8189/shop-core/api/v1/products').then(function (response){
             $scope.prodList = response.data;
             // console.log(response.data());
         });
@@ -47,7 +47,7 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
     }
 
     $scope.tryToAuth = function () {
-        $http.post('http://localhost:8189/shop/auth', $scope.user)
+        $http.post('http://localhost:8192/auth/auth', $scope.user)
             .then(function successCallback(response) {
                 if (response.data.token) {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
@@ -62,7 +62,7 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
     };
 
     $scope.tryToReg = function () {
-        $http.post('http://localhost:8189/app/reg', $scope.user)
+        $http.post('http://localhost:8189/shop-core/reg', $scope.user)
             .then(function successCallback(response) {
                 if (response.data.token) {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
@@ -100,7 +100,7 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
     };
 
     $scope.makeOrder = function () {
-        $http.post('http://localhost:8189/shop/api/v1/order/' + $localStorage.springWebUser.login)
+        $http.post('http://localhost:8189/shop-core/api/v1/order/' + $localStorage.springWebUser.login)
             .then(function successCallback() {
                 $scope.clearCart();
                 $scope.loadCart();
