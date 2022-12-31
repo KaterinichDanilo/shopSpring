@@ -5,9 +5,14 @@ import com.shopSpring.api.ResourceNotFoundException;
 import com.shopSpring.core.entities.Category;
 import com.shopSpring.core.entities.Product;
 import com.shopSpring.core.repositories.ProductRepository;
+import com.shopSpring.core.specifications.ProductSpecification;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -28,8 +33,8 @@ public class ProductService {
     public Optional<Product> findById(Long id) {
         return productRepository.findById(id);
     }
-    public List<Product> findAll(){
-        return productRepository.findAll();
+    public Page<Product> findAll(Specification<Product> specification, int page){
+        return productRepository.findAll(specification, PageRequest.of(page, 10));
     }
 
     public Product createNewProduct(ProductDto productDto){
@@ -41,6 +46,21 @@ public class ProductService {
         product.setCategory(category);
         productRepository.save(product);
         return product;
+    }
+
+    public Specification<Product> createSpecificationBy(Integer minPrice, Integer maxPrice, String title){
+        Specification<Product> specification = Specification.where(null);
+
+        if (minPrice != null) {
+            specification = specification.and(ProductSpecification.priceLessOrEqualThan(minPrice));
+        }
+        if (maxPrice != null) {
+            specification = specification.and(ProductSpecification.priceGreaterOrEqualThan(maxPrice));
+        }
+        if (title != null) {
+            specification = specification.and(ProductSpecification.titleLike(title));
+        }
+        return specification;
     }
 
 }

@@ -6,6 +6,7 @@ import com.shopSpring.core.entities.Product;
 import com.shopSpring.core.services.CategoryService;
 import com.shopSpring.core.services.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,19 +22,18 @@ public class ProductsController {
 
     @GetMapping
     public List<ProductDto> getAllProducts(
-//            @RequestParam(name = "p", defaultValue = "1") Integer page,
-//            @RequestParam(name = "min_price", required = false) Integer minPrice,
-//            @RequestParam(name = "max_price", required = false) Integer maxPrice,
-//            @RequestParam(name = "title_part", required = false) String titlePart
+            @RequestParam(name = "p", defaultValue = "1") Integer page,
+            @RequestParam(name = "min_price", required = false) Integer minPrice,
+            @RequestParam(name = "max_price", required = false) Integer maxPrice,
+            @RequestParam(name = "title", required = false) String titlePart
     ) {
-//        if (page < 1) {
-//            page = 1;
-//        }
-//        return productsService.findAll(minPrice, maxPrice, titlePart, page).map(
-//                p -> productConverter.entityToDto(p)
-//        );
-        return productsService.findAll().stream().map(p ->
-                productConverter.entityToDto(p)).collect(Collectors.toList());
+        if (page < 1) {
+            page = 1;
+        }
+
+        Specification<Product> specification = productsService.createSpecificationBy(minPrice, maxPrice, titlePart);
+
+        return productsService.findAll(specification, page - 1).map(productConverter::entityToDto).getContent();
     }
 
     @GetMapping("/{id}")
