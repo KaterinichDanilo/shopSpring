@@ -1,0 +1,34 @@
+<div>
+    <h3>Cart</h3>
+    <table class="table table-hover">
+        <tr>
+            <td>ID</td>
+            <td>Title</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td> Total price for product</td>
+            <td>Actions</td>
+        </tr>
+        <tbody>
+        <tr ng-repeat="i in cart.cart">
+            <td>{{i.prodId}}</td>
+            <td>{{i.title}}</td>
+            <td>{{i.pricePerProduct}}</td>
+            <td>{{i.quantity}}</td>
+            <td>{{i.totalPrice}}</td>
+            <td><button ng-click="reduce(i.prodId)">-</button></td>
+            <td><button ng-click="remove(i.prodId)">Remove</button></td>
+            <td><button ng-click="increase(i.prodId)">+</button></td>
+        </tr>
+        <tr>
+            <td>Total price</td>
+            <td></td>
+            <td>{{cart.totalPrice}}</td>
+            <td></td>
+            <td><td><button ng-click="clearCart()">Clear cart</button></td></td>
+            <td></td>
+            <td><td><button ng-click="makeOrder()">Make order</button></td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
