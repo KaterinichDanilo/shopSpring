@@ -36,4 +36,61 @@ public class Order {
 
     @JoinColumn(name = "status")
     private String status;
+
+    public static final class OrderBuilder {
+        private Long id;
+        private String username;
+        private List<OrderItem> orderItems;
+        private LocalDateTime createAt;
+        private LocalDateTime updateAt;
+        private String status;
+
+        private OrderBuilder() {
+        }
+
+        public static OrderBuilder anOrder() {
+            return new OrderBuilder();
+        }
+
+        public OrderBuilder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public OrderBuilder withUsername(String username) {
+            this.username = username;
+            return this;
+        }
+
+        public OrderBuilder withOrderItems(List<OrderItem> orderItems) {
+            this.orderItems = orderItems;
+            return this;
+        }
+
+        public OrderBuilder withCreateAt(LocalDateTime createAt) {
+            this.createAt = createAt;
+            return this;
+        }
+
+        public OrderBuilder withUpdateAt(LocalDateTime updateAt) {
+            this.updateAt = updateAt;
+            return this;
+        }
+
+        public OrderBuilder withStatus(String status) {
+            this.status = status;
+            return this;
+        }
+
+        public Order build() {
+            Order order = new Order();
+            order.setId(id);
+            order.setUsername(username);
+            order.setOrderItems(orderItems);
+            order.setCreateAt(createAt);
+            order.setUpdateAt(updateAt);
+            order.setStatus(status);
+            return order;
+        }
+    }
 }
