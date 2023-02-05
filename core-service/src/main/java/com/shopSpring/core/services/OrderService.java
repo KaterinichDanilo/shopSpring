@@ -1,11 +1,9 @@
 package com.shopSpring.core.services;
 
 import com.shopSpring.api.CartDto;
-import com.shopSpring.api.ResourceNotFoundException;
 import com.shopSpring.core.entities.Order;
 import com.shopSpring.core.entities.OrderItem;
 import com.shopSpring.core.integrations.CartServiceIntegration;
-import com.shopSpring.core.model.Cart;
 import com.shopSpring.core.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
